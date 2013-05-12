@@ -1,0 +1,153 @@
+\documentclass[conference]{IEEEtran}
+%\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+\title{Novel Algebras for Advanced Analytics in Julia}
+
+\author{\IEEEauthorblockN{Jeremy Kepner\IEEEauthorrefmark{1},
+Viral B. Shah\IEEEauthorrefmark{2},
+Jeff Bezanson\IEEEauthorrefmark{3}, 
+Stefan Karpinski\IEEEauthorrefmark{4} and
+Alan Edelman\IEEEauthorrefmark{5}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Email: kepner@ll.mit.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Email: viral@mayin.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Email: jeff.bezanson@gmail.com}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}Email: stefan@karpinski.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{5}Email: edelman@math.mit.edu}}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+%\boldmath
+Put Abstract here.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{Semiring algebra}
+
+The duality between the canonical representation of graphs as abstract
+collections of vertices and edges and a sparse adjacency matrix
+representation has been a part of graph theory since its inception
+~\cite{Konig1931}, ~\cite{Konig1936}. Matrix algebra has been
+recognized as a useful tool in graph theory for nearly as long
+(see~\cite{Harary1969} and references therein).  A linear algebraic
+based approach to graph algorithms that exploits the sparse adjacency
+matrix representation of graphs can provide a variety of
+benefits. These benefits include syntactic simplicity, easier
+implementation, and higher performance.  One way to employ linear
+algebra techniques for graph algorithms is to use a broader definition
+of matrix and vector multiplication. One such broader definition is
+that of a semiring.  For example, in semiring notation we write
+matrix-matrix multiply as:
+
+$$C = A +.* B$$
+
+where $$+.*$$ denotes standard matrix multiply.  In such notation, a
+semiring requires that addition and multiplication are associative,
+addition is commutative, and multiplication distributes over addition
+from both left and right.  In graph algorithms, a fundamental
+operation is matrix-matrix multiply where both matrices are sparse.
+This operation represents multi source 1-hop breadth first search
+(BFS) and combine, which is the foundation of many graph
+algorithms~\cite{shahgilbert}.  In addition, it is often the case that
+operations other than standard matrix multiply are desired, for
+example:
+
+\begin{enumerate}
+\item $$C = A {max.+} B$$
+\item $$C = A min.max B$$
+\item $$C = A |.\& B$$
+\item $$C = A f().g() B$$
+\end{enumerate}
+
+With this more general case of sparse matrix multiply, a wide range of graphs algorithms can be implemented~\cite{KepnerGilbertBook}.
+
+\section{Application example}
+
+A classic example of the utility of the semiring approach is in
+finding the minimum path between all vertices in graph (see
+~\cite{Rader} in ~\cite{kepnergilbertbook}.  Given a weighted
+adjacency matrix for a graph where $A(i,j) = w_{ij}$ is the weight of
+a directed edge from vertex $i$ to vertex $j$.  Let $C(i,j)_2$ be the
+minimum 2-hop cost from vertex $i$ to vertex $j$ (if such a path
+exists).  $C_2$ can be computed via the semiring matrix product:
+
+$$C_2 = A min.+ A$$
+
+Likewise, $C_3$ can be computed via
+
+$$C_3 = A min.+ A min.+ A$$
+
+and more generally
+
+$$C_k = A^k$$
+
+\section{Julia}
+
+Despite advances in compiler technology and execution for
+high-performance computing, programmers continue to prefer high-level
+dynamic languages for algorithm development and data analysis in
+applied math, engineering, and the sciences. High-level environments
+such as \Matlab\!, Octave~\cite{Octave}, R~\cite{Rlang},
+SciPy~\cite{numpy}, and SciLab~\cite{scilab} provide greatly increased
+convenience and productivity. However, C and Fortran remain the gold
+standard languages for computationally-intensive problems because
+high-level dynamic languages still lack sufficient performance. As a
+result, the most challenging areas of technical computing have
+benefited the least from the increased abstraction and productivity
+offered by higher level languages.
+
+Two-tiered architectures have emerged as the standard compromise between
+convenience and performance: programmers express high-level logic in a
+dynamic language while the heavy lifting is done in C and Fortran. The
+aforementioned dynamic technical computing environments are all themselves
+instances of this design. While this approach is effective for some
+applications, there are drawbacks. It would be preferable to write
+compute-intensive code in a more productive language as well. This is
+particularly true when developing parallel algorithms, where code
+complexity can increase dramatically. Instead, there is pressure to write
+``vectorized'' code, which is unnatural for many problems and might
+generate large temporary objects which could be avoided with explicit
+loops. Programming in two languages is more complex than using either
+language by itself due to the need for mediation between different type
+domains and memory management schemes. Interfacing between layers may add
+significant overhead and makes whole-program optimization difficult.
+Two-tiered systems also present a social barrier, preventing most users
+from understanding or contributing to their internals.
+
+Julia is designed from the ground up to take advantage of modern
+techniques for executing dynamic languages efficiently. As a result, Julia
+has the performance of a statically compiled language while providing
+interactive dynamic behavior and productivity like Python, LISP or Ruby.
+The key ingredients of performance are:
+\begin{itemize}
+\item Rich type information, provided naturally by multiple dispatch;
+\item Aggressive code specialization against run-time types;
+\item JIT compilation using the LLVM compiler framework~\cite{LLVM}.
+\end{itemize}
+Although a sophisticated type system is made available to the programmer,
+it remains unobtrusive in the sense that one is never required to specify
+types. Type information flows naturally from having actual values (and
+hence types) at the time of code generation, and from the language's core
+paradigm: by expressing the behavior of functions using multiple dispatch,
+the programmer unwittingly provides the compiler with extensive type
+information.
+
+\section{Semiring algebra in Julia}
+
+Multiple dispatch allows $*(op1,op2)(A,B)$, while $*(A,B)$ remains
+traditional matmul for numeric arrays.
+
+One can create a new type and then all of a sudden $(A * B)$
+automatically does the new matmul just by redefining scalar $+$, and
+scalar $*$ for that type.
+
+\section{Performance}
+
+
+\section{Conclusion}
+
+
+\end{document}
