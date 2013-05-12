@@ -1,11 +1,8 @@
+importall Base.Test
+
 require("SemiringAlgebra.jl")
-import SemiringAlgebra.SRNumber
+importall SemiringAlgebra
 
-A=map(SRNumber,rand(5,5))
-
-println(A)
-println(A*A)
-
-se=speye(5)
-s = SparseMatrixCSC(s.m, s.n, s.colptr, s.rowval, map(SRNumber, rand(5)))
-println(s*s)
+A = ones(3,3); A[:,3] = 3
+Amp = mparray(A)
+@test array(Amp*Amp) == [4.0  4.0  6.0; 4.0  4.0  6.0; 4.0  4.0  6.0]

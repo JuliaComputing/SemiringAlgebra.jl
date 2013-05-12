@@ -2,18 +2,21 @@ module SemiringAlgebra
 
 importall Base
 
-export SRNumber
+export MPNumber, mparray, array
 
-immutable SRNumber{T} <: Number
+immutable MPNumber{T} <: Number
     val::T
 end
 
-show(io::IO, k::SRNumber) = print(io, k.val)
-+(a::SRNumber, b::SRNumber) = SRNumber(max(a.val,b.val))
-*(a::SRNumber, b::SRNumber) = SRNumber(a.val+b.val)
+show(io::IO, k::MPNumber) = print(io, k.val)
++(a::MPNumber, b::MPNumber) = MPNumber(max(a.val,b.val))
+*(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
 
-zero{T}(::Type{SRNumber{T}}) = SRNumber(zero(T))
-promote_rule(::Type{SRNumber}, ::Type{Integer}) = SRNumber
-promote_rule(::Type{SRNumber}, ::Type{FloatingPoint}) = SRNumber
+zero{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
+promote_rule(::Type{MPNumber}, ::Type{Integer}) = MPNumber
+promote_rule(::Type{MPNumber}, ::Type{FloatingPoint}) = MPNumber
+
+mparray(A::Array) = map(MPNumber, A)
+array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
 
 end # module
