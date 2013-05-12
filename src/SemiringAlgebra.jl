@@ -12,7 +12,8 @@ show(io::IO, k::MPNumber) = print(io, k.val)
 +(a::MPNumber, b::MPNumber) = MPNumber(max(a.val,b.val))
 *(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
 
-zero{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
+zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
+one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
 promote_rule(::Type{MPNumber}, ::Type{Integer}) = MPNumber
 promote_rule(::Type{MPNumber}, ::Type{FloatingPoint}) = MPNumber
 
