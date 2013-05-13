@@ -14,8 +14,7 @@ show(io::IO, k::MPNumber) = print(io, k.val)
 
 zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
 one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
-promote_rule(::Type{MPNumber}, ::Type{Integer}) = MPNumber
-promote_rule(::Type{MPNumber}, ::Type{FloatingPoint}) = MPNumber
+promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
 
 mparray(A::Array) = map(MPNumber, A)
 array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
