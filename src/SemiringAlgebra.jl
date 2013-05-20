@@ -2,7 +2,7 @@ module SemiringAlgebra
 
 importall Base
 
-export MPNumber, mparray, array
+export MPNumber, mparray, array, mpsparse
 
 immutable MPNumber{T} <: Number
     val::T
@@ -19,6 +19,9 @@ promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
 mparray(A::Array) = map(MPNumber, A)
 array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
 
+mpsparse(S::SparseMatrixCSC) = SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval,
+                                               mparray(S.nzval))
+
 function semiring_matmul(pl, ti, A::Matrix, B::Matrix)
     m=size(A,1); n=size(B,2); p=size(A,2)
     C=[ti(A[i,1],B[1,j]) for i=1:m,j=1:n]
@@ -30,6 +33,40 @@ end
 
 function *(pl::Function, ti::Function)
    (A,B)->semiring_matmul(pl,ti,A,B)
+end
+
+function bench(n)
+    println(n, "x", n, " Float64 array")
+    a = rand(n,n); b = rand(n,n); gc(); @time  a*b
+    println(n, "x", n, " MPNumber{Float64} array")
+    a = mparray(a); b = mparray(b); gc(); @time  a*b
+    println()
+    
+    println(n, "x", n, " Int64 array")
+    a = rand(Int64, n, n); b = rand(Int64, n, n); gc(); @time  a*b
+    println(n, "x", n, " MPNumber{Int64} array")
+    a = mparray(a); b = mparray(b); gc(); @time  a*b
+    println()    
+
+    println(n, "x", n, " sparse Float64 array (dense array in sparse format)")
+    a = sparse(rand(n,n)); b = sparse(rand(n,n)); gc(); @time  a*b
+    println(n, "x", n, " sparse MPNumber{Float64} array (dense array in sparse format)")
+    a = mpsparse(a); b = mpsparse(b); gc(); @time  a*b
+    println()
+
+    println(1000*n, "x", 1000*n, " sparse Float64 array (sprand(n,n,1/n))")
+    a = sprand(1000*n,1000*n, 1/(n*1000)); b = sprand(1000*n,1000*n,1/(n*1000)); gc(); @time  a*b
+    println(1000*n, "x", 1000*n, " sparse MPNumber{Float64} array (sprand(n,n,1/n))")
+    a = mpsparse(a); b = mpsparse(b); gc(); @time  a*b
+    println()
+
+    println(1000*n, "x", 1000*n, " sparse Float64 array (sprand(n,n,5/n))")
+    a = sprand(1000*n,1000*n, 5/(n*1000)); b = sprand(1000*n,1000*n,5/(n*1000)); gc(); @time  a*b
+    println(1000*n, "x", 1000*n, " sparse MPNumber{Float64} array (sprand(n,n,5/n))")
+    a = mpsparse(a); b = mpsparse(b); gc(); @time  a*b
+    println()
+
+    return 
 end
 
 end # module
