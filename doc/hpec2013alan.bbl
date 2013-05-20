@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{Harary1969}
+Frank Harary.
+\newblock {\em Graph Theory}.
+\newblock Addison-Wesley Publishing, 1969.
+
+\bibitem{KepnerGilbertBook}
+Jeremy~V. Kepner and J.~R. Gilbert.
+\newblock {\em {Graph algorithms in the language of linear algebra}}.
+\newblock Society for Industrial and Applied Mathematics, 2011.
+
+\bibitem{Konig1931}
+D\'{e}nes K\H{o}nig.
+\newblock Gr\'{a}fok \'{e}s m\'{a}trixok.
+\newblock {\em Matematikai\'{e}s Fizikai Lapok}, 38:116--119, 1931.
+
+\bibitem{Konig1936}
+D\'{e}nes K\H{o}nig.
+\newblock {\em Theorie der Endlichen und Unendlichen Graphen: Kombinatorische
+  Topologie der Streckenkomplexe}.
+\newblock Akad. Verlag., 1936.
+
+\end{thebibliography}

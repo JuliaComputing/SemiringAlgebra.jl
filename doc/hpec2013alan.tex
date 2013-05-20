@@ -68,7 +68,7 @@ With this more general case of sparse matrix multiply, a wide range of graphs al
 
 A classic example of the utility of the semiring approach is in
 finding the minimum path between all vertices in graph (see
-~\cite{Rader} in ~\cite{kepnergilbertbook}.  Given a weighted
+~\cite{Rader} in ~\cite{KepnerGilbertBook}.  Given a weighted
 adjacency matrix for a graph where $A(i,j) = w_{ij}$ is the weight of
 a directed edge from vertex $i$ to vertex $j$.  Let $C(i,j)_2$ be the
 minimum 2-hop cost from vertex $i$ to vertex $j$ (if such a path
@@ -135,6 +135,12 @@ paradigm: by expressing the behavior of functions using multiple dispatch,
 the programmer unwittingly provides the compiler with extensive type
 information.
 
+We recommend trying the code examples in this paper.  Just a few moments may
+convince the reader that Julia is simple yet powerful.
+All of the code may be found on GITHUB: \verb+http://github.com/ViralBShah/SemiringAlgebra.jl+
+
+
+
 \section{Semiring algebra in Julia}
 
 Julia's ordinary matrix multiplication is recognizable to users of many
@@ -192,8 +198,8 @@ function *(f::Function,g::Function)
 end
 \end{verbatim}
 
-We believe first time Julia users can readily understand the function {\tt ringmatmul}.
-It takes four arguments, the first two, {\tt pl} and {\tt ti}, are functions that will play the role of plus and times.  Functions are first class variables in Julia and thus may be arguments to other functions.  The second two variables are the arrays {\tt A} and {\tt B}.
+We believe first time Julia users can readily understand the function {\tt ringmatmul}, which is mainly the usual matrix multiply loop.
+The function takes four arguments, the first two, {\tt pl} and {\tt ti}, are functions that will play the role of plus and times.  Functions are first class variables in Julia and thus may be arguments to other functions.  The second two variables are the arrays {\tt A} and {\tt B}.
 The function {\tt ringmatmul} is redefining matrix multiply in terms of {\tt pl} and {\tt ti}.
 
 The second function overloads the symbol ``*", for the convenience of the user using the multiple dispatch mechanism.  It says that if ``*"  is called with two arguments, both of which have the type {\tt Function}, then the result is a function itself which takes two arrays as arguments, and proceeds to compute the semiring  {\tt ringmatmul} with arguments {\tt f,g,A,B}.
@@ -201,32 +207,56 @@ The second function overloads the symbol ``*", for the convenience of the user u
 
 \subsection{Semiring Objects}
 
-Here we create semiring Integers ``srInt'' directly in a Julia session, overload
-``+'' and ``*'' to be hardwired as max and plus on srInt's (and only srInt's).  
+Here we create a ``multiply-plus'' semiring.  While this seems hardwired, one
+can at time change the definitions of  ``+'' and ``*'' which below are set to 
+max and plus.  The semiring does not need to be taught matrix multiply,
+and will work on matrices of any type (e.g. ints, floats, ...) and will
+also work on dense or sparse matrices.
+
+
+
 \begin{verbatim}
-type srInt <: Integer
-    k::Int
-    srInt(k) = new(k)
+immutable MPNumber{T} <: Number
+    val::T
 end
-+(a::srInt, b::srInt) = srInt(max(a.k,b.k))
-*(a::srInt, b::srInt) = srInt(a.k+b.k)
+
++(a::MPNumber, b::MPNumber) = MPNumber(max(a.val,b.val))
+*(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
+show(io::IO, k::MPNumber) = print(io, k.val)
+
+zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
+one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
+promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
+
+mparray(A::Array) = map(MPNumber, A)
+array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
+mpsparse(S::SparseMatrixCSC) = SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval,
+                                               mparray(S.nzval))
 \end{verbatim}
 
-A few extra lines come in handy for overloading and io:
-\begin{verbatim}
-convert(::Type{srInt}, i::Int) = srInt(i)
-promote_rule(::Type{srInt}, ::Type{Int}) = srInt
-show(io::IO, k::srInt) = print(io, k.k)
-\end{verbatim}
 
-Now finally we can convert some ordinary matrices to srInt's and check
-that semiring matmul magically works:
+The first function \verb+MPNumber+ is the constructor for a Max Plus Number.
+Then plus and times are defined as max and plus respectively, followed by 
+a routine IO function.
+
+The zero and one in this semiring are defined as the identity elements for max and plus,
+and the promote rule is a Julia construction which allows semi-ring numbers and ordinary
+numbers to work together.
+
+Finally the last three functions allow for the conversion between ordinary arrays and the semi-ring, with a special extra constructor for the important use case of sparse arrays.
+
+Some examples of using the code:
+
 
 \begin{verbatim}
-A=map(srInt,rand(1:10,5,5))
-B=map(srInt,rand(1:10,5,5))
+A=mparray(rand(3,3)); B=mparray(rand(3,3));
 A*B
+A*A
+A^2
+C=mpsparse(sparse(eye(3,3)));
+C*C
 \end{verbatim}
+
 
 
 
@@ -236,11 +266,7 @@ A*B
 
 \section{Conclusion}
 
-\begin{thebibliography}{1}
-
-\bibitem{kepnergilbertbook}  HELLO WORLD
-
-\end{thebibliography}
-
+\bibliographystyle{plain}
+\bibliography{hpec2013alan}
 
 \end{document}
