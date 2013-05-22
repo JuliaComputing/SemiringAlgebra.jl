@@ -2,6 +2,7 @@
 %\hyphenation{op-tical net-works semi-conduc-tor}
 %%%% Testing changes
 \begin{document}
+
 \title{Novel Algebras for Advanced Analytics in Julia}
 
 \author{\IEEEauthorblockN{Jeremy Kepner\IEEEauthorrefmark{1},
@@ -94,7 +95,7 @@ $$C_k = A^k$$
 
 \section{Julia}
 
-Julia is emerging as a very popular computing technology for high performance
+Julia is emerging as a popular language for high performance
 technical computing.  It has been designed from the ground up to take advantage
 of modern techniques for executing dynamic languages efficiently, and still
 be of appeal to scientists, engineers, data analysts, and other
@@ -151,7 +152,7 @@ information.
 
 We recommend trying the code examples in this paper.  Just a few moments may
 convince the reader that Julia is simple yet powerful.
-All of the code may be found on GITHUB:
+All of the code may be found on GitHub:
 \verb+github.com/ViralBShah/SemiringAlgebra.jl+
 
 
@@ -160,7 +161,7 @@ All of the code may be found on GITHUB:
 
 Julia's ordinary matrix multiplication is recognizable to users of many
 high level languages: \\
-{\tt A=rand(m,n); \\  B=rand(n,p); \\ C=A*B } \\ 
+{\tt A=rand(m,n) \\  B=rand(n,p) \\ C=A*B } \\ 
 or one can equally well use the prefix notation \\
 {\tt C = *(A,B)} \\ 
 instead of the infix notation.
@@ -263,10 +264,10 @@ Then plus and times are defined as max and plus respectively, followed by
 a routine IO function.
 
 The zero and one in this semiring are defined as the identity elements for max and plus,
-and the promote rule is a Julia construction which allows semi-ring numbers and ordinary
+and the promote rule is a Julia construction which allows semiring numbers and ordinary
 numbers to work together.
 
-Finally the last three functions allow for the conversion between ordinary arrays and the semi-ring, with a special extra constructor for the important use case of sparse arrays.
+Finally the last three functions allow for the conversion between ordinary arrays and the semiring, with a special extra constructor for the important use case of sparse arrays.
 
 Some examples of using the code:
 
@@ -293,13 +294,12 @@ for the machine and productivity for the human.  We have already demonstrated ho
 Julia is.
 
 On a Macbook Pro, with dual-core 2.4 GHz Intel core i5, 8GB RAM, we compared a dense BLAS run of matmul with an MPNumber{Float64} run in the semiring.
-The BLAS time was 0.26msec (practically free!) for a 100x100 array.  The semiring time
+The BLAS time was 0.26msec (practically free!) for a $100x100$ array.  The semiring time
 was 313 msec.  This is no surprise.
 
-More interesting and more useful is the comparison for sparse matrices.  For an n=100,000 by 100,000 sparse random array with density 1/n, the ordinary matrix multiply took 21 msec, and the semi-ring matrix multiply took a comperable
-22 msec.
+More interesting and more useful is the comparison for sparse matrices.  For an $n x n$ sparse random array with density 1/n, where $n = 100,000$ the ordinary matrix multiply took 21 msec, and the semiring matrix multiply took a comparable 22 msec.
 
-For a higher density (5/n) we found 461 msec for the matmul compared to 414 msec in the semi-ring.
+For a higher density (5/n) we found 461 msec for the matmul compared to 414 msec in the semiring.
 
 
 
@@ -307,7 +307,7 @@ For a higher density (5/n) we found 461 msec for the matmul compared to 414 msec
 \section{Conclusion}
 
 Julia facilitates the implementation and exploration of graph algorithms through
-the semiring notation of generalized matrix mutliply.  Thhese algorithms appear
+the semiring notation of generalized matrix mutliply.  These algorithms appear
 in applications to data analysis and related fields.  Exploitation of sparse data 
 strucutres provides simple easy implemeentations with reasonable performance.
 Sparse semiring performance is likely to be comparable to ordinary sparse matmul in the Julia
