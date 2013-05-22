@@ -137,7 +137,8 @@ information.
 
 We recommend trying the code examples in this paper.  Just a few moments may
 convince the reader that Julia is simple yet powerful.
-All of the code may be found on GITHUB: \verb+http://github.com/ViralBShah/SemiringAlgebra.jl+
+All of the code may be found on GITHUB:
+\verb+github.com/ViralBShah/SemiringAlgebra.jl+
 
 
 
@@ -220,18 +221,26 @@ immutable MPNumber{T} <: Number
     val::T
 end
 
-+(a::MPNumber, b::MPNumber) = MPNumber(max(a.val,b.val))
-*(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
-show(io::IO, k::MPNumber) = print(io, k.val)
++(a::MPNumber,b::MPNumber)
+      = MPNumber(max(a.val,b.val))
+*(a::MPNumber,b::MPNumber)
+      = MPNumber(a.val+b.val)
+show(io::IO, k::MPNumber)
+      = print(io, k.val)
 
-zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
-one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
-promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
+zero{T}(::Type{MPNumber{T}})
+      = MPNumber(typemin(T))
+one{T}(::Type{MPNumber{T}})
+      = MPNumber(zero(T))
+promote_rule(::Type{MPNumber},::Type{Number}) 
+      = MPNumber
 
 mparray(A::Array) = map(MPNumber, A)
-array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
-mpsparse(S::SparseMatrixCSC) = SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval,
-                                               mparray(S.nzval))
+array{T}(A::Array{MPNumber{T}})
+      = map(x->x.val, A)
+mpsparse(S::SparseMatrixCSC)
+      = SparseMatrixCSC(S.m, S.n, S.colptr, 
+             S.rowval,mparray(S.nzval))
 \end{verbatim}
 
 
@@ -263,8 +272,19 @@ C*C
 
 \section{Performance}
 
+The ultimate performance for an ordinary matrix multiply on floating point numbers 
+would be the expected outcome of a highly tuned BLAS routine perhaps for a targeted
+architecture.  The goal of Julia is to have the right combination of reasonable performance
+for the machine and productivity for the human.  We have already demonstrated how expressive
+Julia is.
+
 
 \section{Conclusion}
+
+Julia facilitates the implementation and exploration of graph algorithms through
+the semiring notation of generalized matrix mutliply.  Thhese algorithms appear
+in applications to data analysis and related fields.  Exploitation of sparse data 
+strucutres provides simple easy implemeentations with reasonable performance.
 
 \bibliographystyle{plain}
 \bibliography{hpec2013alan}
