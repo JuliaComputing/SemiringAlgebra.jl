@@ -3,9 +3,9 @@ The style file: plain.bst
 Database file #1: hpec2013alan.bib
 Warning--I didn't find a database entry for "shahgilbert"
 Warning--I didn't find a database entry for "Rader"
-Warning--I didn't find a database entry for "Octave"
-Warning--I didn't find a database entry for "Rlang"
-Warning--I didn't find a database entry for "numpy"
-Warning--I didn't find a database entry for "scilab"
 Warning--I didn't find a database entry for "LLVM"
+Warning--to sort, need author or key in Octave
+Warning--to sort, need author or key in Rlang
+Warning--to sort, need author or key in numpy
+Warning--to sort, need author or key in scilab
 (There were 7 warnings)

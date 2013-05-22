@@ -1,5 +1,17 @@
 \begin{thebibliography}{1}
 
+\bibitem{Octave}
+http://www.octave.org.
+
+\bibitem{Rlang}
+http://www.r-project.org.
+
+\bibitem{numpy}
+http://www.numpy.org.
+
+\bibitem{scilab}
+http://www.scilab.org.
+
 \bibitem{Harary1969}
 Frank Harary.
 \newblock {\em Graph Theory}.

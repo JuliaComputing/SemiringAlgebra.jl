@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2010.12.4)  20 MAY 2013 10:04
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2010.12.4)  22 MAY 2013 06:48
 entering extended mode
 **C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
 (C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
@@ -121,13 +121,27 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 19.
 
 
+LaTeX Warning: Citation `Konig1931' on page 1 undefined on input line 33.
+
+
 LaTeX Warning: Citation `Konig1936' on page 1 undefined on input line 33.
+
+
+LaTeX Warning: Citation `Harary1969' on page 1 undefined on input line 35.
 
 
 LaTeX Warning: Citation `shahgilbert' on page 1 undefined on input line 54.
 
 
+LaTeX Warning: Citation `KepnerGilbertBook' on page 1 undefined on input line 6
+5.
+
+
 LaTeX Warning: Citation `Rader' on page 1 undefined on input line 71.
+
+
+LaTeX Warning: Citation `KepnerGilbertBook' on page 1 undefined on input line 7
+1.
 
 
 LaTeX Warning: Citation `Octave' on page 1 undefined on input line 93.
@@ -250,7 +264,7 @@ rogram Files/MiKTeX 2.7/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKT
 eX 2.7/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/typ
 e1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on hpec2013alan.pdf (3 pages, 136232 bytes).
+Output written on hpec2013alan.pdf (3 pages, 136616 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
