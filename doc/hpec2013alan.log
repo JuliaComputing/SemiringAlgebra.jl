@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2010.12.4)  22 MAY 2013 06:48
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2010.12.4)  22 MAY 2013 07:19
 entering extended mode
 **C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
 (C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
@@ -144,6 +144,9 @@ LaTeX Warning: Citation `KepnerGilbertBook' on page 1 undefined on input line 7
 1.
 
 
+LaTeX Warning: Citation `matlab' on page 1 undefined on input line 93.
+
+
 LaTeX Warning: Citation `Octave' on page 1 undefined on input line 93.
 
 
@@ -246,10 +249,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 981 strings out of 95304
- 16785 string characters out of 1183070
+ 982 strings out of 95304
+ 16793 string characters out of 1183070
  70196 words of memory out of 1500000
- 4239 multiletter control sequences out of 110000
+ 4240 multiletter control sequences out of 110000
  39011 words of font info for 76 fonts, out of 3000000 for 5000
  14 hyphenation exceptions out of 8191
  32i,10n,24p,464b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -264,7 +267,7 @@ rogram Files/MiKTeX 2.7/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKT
 eX 2.7/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/typ
 e1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on hpec2013alan.pdf (3 pages, 136616 bytes).
+Output written on hpec2013alan.pdf (3 pages, 137188 bytes).
 PDF statistics:
  57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)

@@ -1,16 +1,10 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{Octave}
-http://www.octave.org.
-
-\bibitem{Rlang}
-http://www.r-project.org.
-
-\bibitem{numpy}
-http://www.numpy.org.
-
-\bibitem{scilab}
-http://www.scilab.org.
+\bibitem{shahgilbert}
+John~R. Gilbert, Steve Reinhardt, and Viral~B. Shah.
+\newblock A unified framework for numerical and combinatorial computing.
+\newblock {\em Computing in Sciences and Engineering}, 10(2):20--25, Mar/Apr
+  2008.
 
 \bibitem{Harary1969}
 Frank Harary.
@@ -32,5 +26,36 @@ D\'{e}nes K\H{o}nig.
 \newblock {\em Theorie der Endlichen und Unendlichen Graphen: Kombinatorische
   Topologie der Streckenkomplexe}.
 \newblock Akad. Verlag., 1936.
+
+\bibitem{LLVM}
+LLVM.
+\newblock http://llvm.org.
+
+\bibitem{matlab}
+MATLAB.
+\newblock http://www.mathworks.com.
+
+\bibitem{numpy}
+Numpy.
+\newblock http://www.numpy.org.
+
+\bibitem{Octave}
+Octave.
+\newblock http://www.octave.org.
+
+\bibitem{Rlang}
+R.
+\newblock http://www.r-project.org.
+
+\bibitem{Rader}
+Charles~M. Rader.
+\newblock Connected components and minimum paths.
+\newblock In Jeremy~V. Kepner and J.~R. Gilbert, editors, {\em {Graph
+  algorithms in the language of linear algebra}}. Society for Industrial and
+  Applied Mathematics, 2011.
+
+\bibitem{scilab}
+Scilab.
+\newblock http://www.scilab.org.
 
 \end{thebibliography}
