@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{julia}
+Jeff Bezanson, Stefan Karpinski, Viral Shah, and Alan Edelman.
+\newblock Julia: A fast dynamic language for technical computing.
+\newblock www-math.mit.edu/~edelman/homepage/papers/juliafast.pdf, 2012.
+
 \bibitem{shahgilbert}
 John~R. Gilbert, Steve Reinhardt, and Viral~B. Shah.
 \newblock A unified framework for numerical and combinatorial computing.
