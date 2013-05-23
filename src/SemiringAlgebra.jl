@@ -20,13 +20,13 @@ array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
 mpsparse(S::SparseMatrixCSC) =
     SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval, mparray(S.nzval))
 
-function ringmatmul(pl, ti, A::Matrix, B::Matrix)
-    m=size(A,1); n=size(B,2); p=size(A,2)
-    C=[ti(A[i,1],B[1,j]) for i=1:m,j=1:n]
+function ringmatmul(+, *, A::Matrix, B::Matrix)
+    m, n, p = size(A,1), size(B,2), size(A,2)
+    C = [A[i,1]*B[1,j] for i=1:m, j=1:n]
     for i=1:m, j=1:n, k=2:p
-        C[i,j] = pl(C[i,j], ti(A[i,k],B[k,j]))
+        C[i,j] += A[i,k]*B[k,j]
     end 
-    C         
+    return C
 end      
 
 *(pl::Function, ti::Function) = (A,B)->ringmatmul(pl,ti,A,B)
