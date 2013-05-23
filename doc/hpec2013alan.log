@@ -1,22 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2012/dev/Arch Linux) (format=pdflatex 2012.5.29)  22 MAY 2013 20:43
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2010.12.4)  23 MAY 2013 18:48
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**hpec2013alan
-(./hpec2013alan.tex
-LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2011-07-01, ngerman-x-2011-07-01, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
-h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
- icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
-iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
- lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
-ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
-ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
-.
-(./IEEEtran.cls
+**C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
+(C:/Users/Edelman/Documents/GitHub/SemiringAlgebra.jl/doc/hpec2013alan.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+(IEEEtran.cls
 Document Class: IEEEtran 2012/11/21 V1.8c by Harald Hanche-Olsen and Anders Chr
 istensen
 -- Based on V1.7a by Michael Shell
@@ -29,7 +18,7 @@ istensen
 \@IEEEtrantmptoksA=\toks14
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 373.
 
-(/usr/share/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+("C:\Program Files\MiKTeX 2.7\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 -- Using 8.5in x 11in (letter) paper.
@@ -102,9 +91,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \@IEEEtmpitemindent=\dimen116
 \c@IEEEbiography=\count90
 \@IEEEtranrubishbin=\box26
-) (./hpec2013alan.aux)
-\openout1 = `hpec2013alan.aux'.
-
+) (hpec2013alan.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
@@ -132,33 +119,85 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 20.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+LaTeX Warning: Citation `Konig1931' on page 1 undefined on input line 42.
+
+
+LaTeX Warning: Citation `Konig1936' on page 1 undefined on input line 42.
+
+
+LaTeX Warning: Citation `Harary1969' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `shahgilbert' on page 1 undefined on input line 63.
+
+
+LaTeX Warning: Citation `KepnerGilbertBook' on page 1 undefined on input line 7
+4.
+
+
+LaTeX Warning: Citation `Rader' on page 1 undefined on input line 80.
+
+
+LaTeX Warning: Citation `KepnerGilbertBook' on page 1 undefined on input line 8
+0.
+
+
+LaTeX Warning: Citation `matlab' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `Octave' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `Rlang' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `numpy' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `scilab' on page 1 undefined on input line 99.
+
+
+LaTeX Warning: Citation `julia' on page 1 undefined on input line 101.
+
+[1{C:/ProgramData/MiKTeX/2.7/pdftex/config/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 155.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 112.
 
 
-(/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+("C:\Program Files\MiKTeX 2.7\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [2]
-Overfull \hbox (4.95013pt too wide) in paragraph at lines 261--261
+)
+Overfull \hbox (10.95013pt too wide) in paragraph at lines 164--164
+[]\OT1/pcr/m/n/10 function ringmatmul(+,*,A::Matrix,B::Matrix)[] 
+ []
+
+
+Overfull \hbox (4.95013pt too wide) in paragraph at lines 164--164
+[]  \OT1/pcr/m/n/10 m, n, p = size(A,1), size(B,2), size(A,2)[] 
+ []
+
+[2]
+Overfull \hbox (4.95013pt too wide) in paragraph at lines 214--214
 []      \OT1/pcr/m/n/10 = SparseMatrixCSC(S.m, S.n, S.colptr,[] 
  []
 
 
-Overfull \hbox (4.95013pt too wide) in paragraph at lines 284--284
+Overfull \hbox (4.95013pt too wide) in paragraph at lines 237--237
 []\OT1/pcr/m/n/10 A=mparray(rand(3,3)); B=mparray(rand(3,3));[] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 298.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 251.
 
-(/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+("C:\Program Files\MiKTeX 2.7\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 298.
- (./hpec2013alan.bbl)
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 251.
+ (hpec2013alan.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -170,29 +209,36 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3] (./hpec2013alan.aux) ) 
+[3] (hpec2013alan.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 999 strings out of 493629
- 17086 string characters out of 3148778
- 71998 words of memory out of 3000000
- 4359 multiletter control sequences out of 15000+200000
- 37904 words of font info for 75 fonts, out of 3000000 for 9000
- 831 hyphenation exceptions out of 8191
- 32i,10n,24p,403b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</
-usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
-texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type
-1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb
-></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on hpec2013alan.pdf (3 pages, 134377 bytes).
+ 1001 strings out of 95304
+ 17067 string characters out of 1183070
+ 70196 words of memory out of 1500000
+ 4256 multiletter control sequences out of 110000
+ 39011 words of font info for 76 fonts, out of 3000000 for 5000
+ 14 hyphenation exceptions out of 8191
+ 32i,10n,24p,431b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.7/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
+s/MiKTeX 2.7/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX
+ 2.7/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.7/font
+s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/urw/courier/ucrr8a.pfb><C:/P
+rogram Files/MiKTeX 2.7/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKT
+eX 2.7/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/typ
+e1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.7/fonts/type1/urw/times/utmr
+i8a.pfb>
+Output written on hpec2013alan.pdf (3 pages, 143203 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
+ 57 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

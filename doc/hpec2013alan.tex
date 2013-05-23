@@ -150,7 +150,7 @@ Julia's generic definitions for matrix multiplication, which depends only on hav
 First time users should readily be able to google, download, and install Julia.
 The star overloading functionality may be explored by typing directly into a Julia session:
 \begin{verbatim}
-function ringmatmul(+, *, A::Matrix, B::Matrix)
+function ringmatmul(+,*,A::Matrix,B::Matrix)
   m, n, p = size(A,1), size(B,2), size(A,2)
   C = [A[i,1]*B[1,j] for i=1:m, j=1:n]
   for i=1:m, j=1:n, k=2:p
@@ -159,7 +159,8 @@ function ringmatmul(+, *, A::Matrix, B::Matrix)
   return C
 end
 
-*((+)::Function, (*)::Function) = (A,B)->ringmatmul(+,*,A,B)
+*((+)::Function, (*)::Function) = 
+              (A,B)->ringmatmul(+,*,A,B)
 \end{verbatim}
 
 The {\tt ringmatmul} function is straightforward -- it is a standard na\"ive triple loop matrix multiply.
@@ -178,7 +179,7 @@ it returns a function as a value, which can then be used elsewhere, again with t
 Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
 by changing the definitions of ``+'' and ``*'', which below are set to use
 ``max'' and ``plus''.
-The new type does not need to be taught matrix multiply, will work with
+The new type does not need to be taught matrix multiply; matmul will work with
 any underlying numeric type (e.g. int, float, ...), and will also work with
 both dense and sparse matrices. Arrays of the new semiring type will use the
 same amount of memory as ``primitive'' arrays of the underlying numeric type.
@@ -267,6 +268,7 @@ strucutres provides easy implementations with reasonable performance.
 Sparse semiring performance is likely to be comparable to ordinary sparse matmul in the Julia
 language.
 
+\section{Acknowledgements}
 
 \bibliographystyle{plain}
 \bibliography{hpec2013alan}
