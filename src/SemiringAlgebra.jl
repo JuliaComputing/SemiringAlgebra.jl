@@ -20,7 +20,7 @@ array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
 mpsparse(S::SparseMatrixCSC) =
     SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval, mparray(S.nzval))
 
-function semiring_matmul(pl, ti, A::Matrix, B::Matrix)
+function ringmatmul(pl, ti, A::Matrix, B::Matrix)
     m=size(A,1); n=size(B,2); p=size(A,2)
     C=[ti(A[i,1],B[1,j]) for i=1:m,j=1:n]
     for i=1:m, j=1:n, k=2:p
@@ -29,9 +29,7 @@ function semiring_matmul(pl, ti, A::Matrix, B::Matrix)
     C         
 end      
 
-function *(pl::Function, ti::Function)
-   (A,B)->semiring_matmul(pl,ti,A,B)
-end
+*(pl,ti) = (A,B)->ringmatmul(pl,ti,A,B)
 
 function bench(n)
     println(n, "x", n, " Float64 array")
