@@ -1,26 +1,24 @@
 module SemiringAlgebra
 
-importall Base
-
 export MPNumber, mparray, array, mpsparse
 
 immutable MPNumber{T} <: Number
     val::T
 end
 
-show(io::IO, k::MPNumber) = print(io, k.val)
 +(a::MPNumber, b::MPNumber) = MPNumber(max(a.val,b.val))
 *(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
 
-zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
-one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
-promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
+Base.show(io::IO, k::MPNumber) = print(io, k.val)
+Base.zero{T}(::Type{MPNumber{T}}) = MPNumber(typemin(T))
+Base.one{T}(::Type{MPNumber{T}}) = MPNumber(zero(T))
+Base.promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
 
 mparray(A::Array) = map(MPNumber, A)
 array{T}(A::Array{MPNumber{T}}) = map(x->x.val, A)
 
-mpsparse(S::SparseMatrixCSC) = SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval,
-                                               mparray(S.nzval))
+mpsparse(S::SparseMatrixCSC) =
+    SparseMatrixCSC(S.m, S.n, S.colptr, S.rowval, mparray(S.nzval))
 
 function semiring_matmul(pl, ti, A::Matrix, B::Matrix)
     m=size(A,1); n=size(B,2); p=size(A,2)
