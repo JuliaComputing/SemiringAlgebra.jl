@@ -29,7 +29,7 @@ function ringmatmul(pl, ti, A::Matrix, B::Matrix)
     C         
 end      
 
-*(pl,ti) = (A,B)->ringmatmul(pl,ti,A,B)
+*(pl::Function, ti::Function) = (A,B)->ringmatmul(pl,ti,A,B)
 
 function bench(n)
     println(n, "x", n, " Float64 array")
