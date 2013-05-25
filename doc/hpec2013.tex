@@ -1,26 +1,32 @@
 \documentclass[conference]{IEEEtran}
-%\hyphenation{op-tical net-works semi-conduc-tor}
-
 \begin{document}
+
 \title{Novel Algebras for Advanced Analytics in Julia}
 
-\author{\IEEEauthorblockN{Jeremy Kepner\IEEEauthorrefmark{1},
-Viral B. Shah\IEEEauthorrefmark{2},
-Jeff Bezanson\IEEEauthorrefmark{3}, 
-Stefan Karpinski\IEEEauthorrefmark{4} and
-Alan Edelman\IEEEauthorrefmark{5}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Email: kepner@ll.mit.edu}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Email: viral@mayin.org}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Email: jeff.bezanson@gmail.com}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}Email: stefan@karpinski.org}
-\IEEEauthorblockA{\IEEEauthorrefmark{5}Email: edelman@math.mit.edu}}
-
+\author{\IEEEauthorblockN{
+Jeff Bezanson\IEEEauthorrefmark{4},
+Stefan Karpinski\IEEEauthorrefmark{3},
+Jeremy Kepner\IEEEauthorrefmark{5},
+Viral B. Shah\IEEEauthorrefmark{1}, and
+Alan Edelman\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}Email: bezanson@mit.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Email: stefan@karpinski.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{5}Email: kepner@ll.mit.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Email: viral@mayin.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Email: edelman@math.mit.edu}}
 % make the title area
 \maketitle
 
 \begin{abstract}
 %\boldmath
-Put Abstract here.
+A linear algebraic approach to graph algorithms that exploits the
+sparse adjacency matrix representation of graphs can provide a variety
+of benefits. These benefits include syntactic simplicity, easier
+implementation, and higher performance.  One way to employ linear
+algebra techniques for graph algorithms is to use a broader definition
+of matrix and vector multiplication.  We demonstrate through the use
+of the Julia language system how easy it is to explore semirings using
+linear algebraic methodologies.
 \end{abstract}
 
 \section{Introduction}
@@ -33,14 +39,13 @@ representation has been a part of graph theory since its inception
 ~\cite{Konig1931}, ~\cite{Konig1936}. Matrix algebra has been
 recognized as a useful tool in graph theory for nearly as long
 (see~\cite{Harary1969} and references therein).  A linear algebraic
-based approach to graph algorithms that exploits the sparse adjacency
-matrix representation of graphs can provide a variety of
-benefits. These benefits include syntactic simplicity, easier
-implementation, and higher performance.  One way to employ linear
-algebra techniques for graph algorithms is to use a broader definition
-of matrix and vector multiplication. One such broader definition is
-that of a semiring.  For example, in semiring notation we write
-matrix-matrix multiply as:
+approach to graph algorithms that exploits the sparse adjacency matrix
+representation of graphs can provide a variety of benefits. These
+benefits include syntactic simplicity, easier implementation, and
+higher performance.  One way to employ linear algebra techniques for
+graph algorithms is to use a broader definition of matrix and vector
+multiplication. One such broader definition is that of a semiring.
+For example, in semiring notation we write matrix-matrix multiply as:
 
 $$C = A +.* B$$
 
@@ -56,29 +61,30 @@ operations other than standard matrix multiply are desired, for
 example:
 
 \begin{enumerate}
-\item $$C = A {max.+} B$$
-\item $$C = A min.max B$$
-\item $$C = A |.\& B$$
-\item $$C = A f().g() B$$
+\item $$C = A \ {\max.+} B$$
+\item $$C = A \ \min.\max B$$
+\item $$C = A \ |.\& B \ ({\mbox or.and})$$
+\item $$C = A f.g B $$
 \end{enumerate}
 
-With this more general case of sparse matrix multiply, a wide range of graphs algorithms can be implemented~\cite{KepnerGilbertBook}.
+With this more general case of sparse matrix multiply, a wide range of
+graphs algorithms can be implemented~\cite{KepnerGilbertBook}.
 
 \section{Application example}
 
 A classic example of the utility of the semiring approach is in
 finding the minimum path between all vertices in graph (see
-~\cite{Rader} in ~\cite{kepnergilbertbook}.  Given a weighted
+~\cite{Rader} in ~\cite{KepnerGilbertBook}.  Given a weighted
 adjacency matrix for a graph where $A(i,j) = w_{ij}$ is the weight of
 a directed edge from vertex $i$ to vertex $j$.  Let $C(i,j)_2$ be the
-minimum 2-hop cost from vertex $i$ to vertex $j$ (if such a path
-exists).  $C_2$ can be computed via the semiring matrix product:
+minimum 2-hop cost from vertex $i$ to vertex $j$.
+$C_2$ can be computed via the semiring matrix product:
 
-$$C_2 = A min.+ A$$
+$$C_2 = A \ \min.+ A$$
 
 Likewise, $C_3$ can be computed via
 
-$$C_3 = A min.+ A min.+ A$$
+$$C_3 = A\  \min.+ A \min.+ A$$
 
 and more generally
 
@@ -86,68 +92,182 @@ $$C_k = A^k$$
 
 \section{Julia}
 
-Despite advances in compiler technology and execution for
-high-performance computing, programmers continue to prefer high-level
-dynamic languages for algorithm development and data analysis in
-applied math, engineering, and the sciences. High-level environments
-such as \Matlab\!, Octave~\cite{Octave}, R~\cite{Rlang},
-SciPy~\cite{numpy}, and SciLab~\cite{scilab} provide greatly increased
-convenience and productivity. However, C and Fortran remain the gold
-standard languages for computationally-intensive problems because
-high-level dynamic languages still lack sufficient performance. As a
-result, the most challenging areas of technical computing have
-benefited the least from the increased abstraction and productivity
-offered by higher level languages.
+It has become clear that programmers and scientists prefer high-level, interactive, dynamic environments for algorithm development and data analysis.
+Systems such as Matlab~\cite{matlab}, Octave~\cite{Octave}, R~\cite{Rlang}, SciPy~\cite{numpy}, and SciLab~\cite{scilab} provide greatly increased convenience and productivity, yet C and Fortran remain the gold standard for computationally-intensive problems because these high-level dynamic systems still lag significantly in performance.
+As a result, the most challenging areas of technical computing have benefited the least from the increased abstraction and productivity offered by higher level languages.
+Julia~\cite{julia} is a high-level, dynamic language, designed from the ground up to take advantage of modern techniques for executing dynamic languages efficiently.
+As a result, Julia has the performance of a statically compiled language while providing the interactive, dynamic experience and productivity that scientists have come to expect.
 
-Two-tiered architectures have emerged as the standard compromise between
-convenience and performance: programmers express high-level logic in a
-dynamic language while the heavy lifting is done in C and Fortran. The
-aforementioned dynamic technical computing environments are all themselves
-instances of this design. While this approach is effective for some
-applications, there are drawbacks. It would be preferable to write
-compute-intensive code in a more productive language as well. This is
-particularly true when developing parallel algorithms, where code
-complexity can increase dramatically. Instead, there is pressure to write
-``vectorized'' code, which is unnatural for many problems and might
-generate large temporary objects which could be avoided with explicit
-loops. Programming in two languages is more complex than using either
-language by itself due to the need for mediation between different type
-domains and memory management schemes. Interfacing between layers may add
-significant overhead and makes whole-program optimization difficult.
-Two-tiered systems also present a social barrier, preventing most users
-from understanding or contributing to their internals.
+Julia also introduces many powerful computer science tools to scientific computing, including a sophisticated type system, multiple dispatch, coroutines, Lisp-style metaprogramming (including real macros), and built-in support for distributed computation.
+Although a powerful type system is made available to the programmer, it remains unobtrusive in the sense that one is never required to specify types, nor is performance dependent upon doing so:
+unless the programmer wants to take advantage of Julia's dispatch system or create C-compatible types, their code will work just as well without ever mentioning types.
+Likewise, coroutines, macros and distributed programming primitives are right there, should the programmer ever need them, but are not required for day-to-day programming.
 
-Julia is designed from the ground up to take advantage of modern
-techniques for executing dynamic languages efficiently. As a result, Julia
-has the performance of a statically compiled language while providing
-interactive dynamic behavior and productivity like Python, LISP or Ruby.
-The key ingredients of performance are:
-\begin{itemize}
-\item Rich type information, provided naturally by multiple dispatch;
-\item Aggressive code specialization against run-time types;
-\item JIT compilation using the LLVM compiler framework~\cite{LLVM}.
-\end{itemize}
-Although a sophisticated type system is made available to the programmer,
-it remains unobtrusive in the sense that one is never required to specify
-types. Type information flows naturally from having actual values (and
-hence types) at the time of code generation, and from the language's core
-paradigm: by expressing the behavior of functions using multiple dispatch,
-the programmer unwittingly provides the compiler with extensive type
-information.
+We recommend trying the code examples in this paper.
+Just a few moments may convince the reader that Julia is simple yet powerful.
+All of the code may be found on GitHub:
+{\tt http://github.com/ViralBShah/SemiringAlgebra.jl}
 
 \section{Semiring algebra in Julia}
 
-Multiple dispatch allows $*(op1,op2)(A,B)$, while $*(A,B)$ remains
-traditional matmul for numeric arrays.
+Julia's ordinary matrix multiplication is recognizable to users of many
+high level languages: \\
+{\tt A=rand(m,n) \\  B=rand(n,p) \\ C=A*B } \\
+or one can equally well use the prefix notation \\
+{\tt C = *(A,B)} \\
+instead of the infix notation.
 
-One can create a new type and then all of a sudden $(A * B)$
-automatically does the new matmul just by redefining scalar $+$, and
-scalar $*$ for that type.
+We believe that users of matrix-multiply who are used
+to such compact expressions would prefer not to have
+overly complicated syntax to express the more general
+semirings.  Julia offers two approaches that are readily
+available for exploration:
+
+1) Star overloading:
+This method is recommended for interactive exploration of many semiring operators.
+Without introducing any types, define  {\tt *(f,g)(A,B)} to
+perform the semiring operation very generally, with no a-priori restriction
+on the binary functions {\tt f} or {\tt g}.   Upon overloading the star operator,
+and defining the ringmatmul, the following immediately work in Julia:
+\begin{verbatim}
+*(max,+)(A,B)
+*(min,max)(A,B)
+*(|,&)(A,B)
+*(+,*)(A,B)
+\end{verbatim}
+The last example computes the usual matrix product.
+
+2) Creation of semiring objects:
+This method is recommended for users who are working exclusively in one semiring and wish to optimize notation and performance.
+In this method, a semiring type is created, and one overloads scalar {\tt +} and scalar {\tt *} only.
+Julia's generic definitions for matrix multiplication, which depends only on having appropriate definitions for {\tt +} and {\tt *} does the rest, allowing one to immediately compute matrix products in the newly defined semiring, using the usual notation for matrix products.
+
+\subsection{Star Overloading}
+
+First time users should readily be able to google, download, and install Julia.
+The star overloading functionality may be explored by typing directly into a Julia session:
+\begin{verbatim}
+function ringmatmul(+,*,A::Matrix,B::Matrix)
+  m, n, p = size(A,1), size(B,2), size(A,2)
+  C = [A[i,1]*B[1,j] for i=1:m, j=1:n]
+  for i=1:m, j=1:n, k=2:p
+    C[i,j] += A[i,k]*B[k,j]
+  end
+  return C
+end
+
+*((+)::Function, (*)::Function) = 
+              (A,B)->ringmatmul(+,*,A,B)
+\end{verbatim}
+
+The {\tt ringmatmul} function is straightforward -- it is a standard na\"ive triple loop matrix multiply.
+The function takes four arguments, the first two, {\tt +} and {\tt *}, are functions that will serves as the local versions of addition and multiplication, while the last two are the matrices to multiply using those operations.
+This highlights a few relevant features of the Julia language.
+First, functions are first-class values that can be passed into other functions as arguments and then used with standard function call syntax.
+Second, the {\tt +} and {\tt *} operators are just regular functions with some special syntax.
+For example, the expression {\tt C[i,j] += A[i,k]*B[k,j]} is translated into {\tt C[i,j] = +(C[i,j],*(A[i,k],B[k,j]))} where the functions {\tt +} and {\tt *} are looked up in the current scope just like any other variables would be.
+The second function definition says that if ``*"  is called with two arguments, both of which have the type {\tt Function}, then the result is a function itself which takes two arrays as arguments, and calls {\tt ringmatmul} with arguments {\tt f,g,A,B}.
+This highlights a few more features of Julia:
+it uses multiple dispatch by proding a new behavior for {\tt *} when its areguments are functions;
+it returns a function as a value, which can then be used elsewhere, again with the standard function call syntax.
+
+\subsection{Semiring Objects}
+
+Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
+by changing the definitions of ``+'' and ``*'', which below are set to use
+``max'' and ``plus''.
+The new type does not need to be taught matrix multiply; matmul will work with
+any underlying numeric type (e.g. int, float, ...), and will also work with
+both dense and sparse matrices. Arrays of the new semiring type will use the
+same amount of memory as ``primitive'' arrays of the underlying numeric type.
+
+
+\begin{verbatim}
+immutable MPNumber{T} <: Number
+    val::T
+end
+
++(a::MPNumber,b::MPNumber)
+      = MPNumber(max(a.val,b.val))
+*(a::MPNumber,b::MPNumber)
+      = MPNumber(a.val+b.val)
+show(io::IO, k::MPNumber)
+      = print(io, k.val)
+
+zero{T}(::Type{MPNumber{T}})
+      = MPNumber(typemin(T))
+one{T}(::Type{MPNumber{T}})
+      = MPNumber(zero(T))
+promote_rule{T<:Number}(::Type{MPNumber},
+                        ::Type{T})
+      = MPNumber
+
+mparray(A::Array) = map(MPNumber, A)
+array{T}(A::Array{MPNumber{T}})
+      = map(x->x.val, A)
+mpsparse(S::SparseMatrixCSC)
+      = SparseMatrixCSC(S.m, S.n, S.colptr,
+             S.rowval,mparray(S.nzval))
+\end{verbatim}
+
+
+The first definition describes the \verb+MPNumber+ type.
+Then plus and times are defined as max and plus respectively, followed by
+a routine IO function.
+
+The zero and one in this semiring are defined as the identity elements for max and plus,
+and the promote rule is a Julia construction which allows semiring numbers and ordinary
+numbers to work together.
+
+Finally the last three functions allow for the conversion between ordinary arrays and the semiring, with a special extra constructor for the important use case of sparse arrays.
+
+Some examples of using the code:
+
+
+\begin{verbatim}
+A=mparray(rand(3,3)); B=mparray(rand(3,3));
+A*B
+A*A
+A^2
+C=mpsparse(sparse(eye(3,3)));
+C*C
+\end{verbatim}
+
+
+
+
 
 \section{Performance}
+
+Peak possible performance for an ordinary matrix multiply on floating point numbers
+would be achieved by a highly tuned BLAS routine.
+The goal of Julia is to have the right combination of reasonable performance
+for the machine and productivity for the human.  So while we do not expect to match
+a tuned BLAS, performance will often be comparable to that of naive C code.
+
+On a Macbook Pro, with dual-core 2.4 GHz Intel core i5, 8GB RAM, we compared a dense BLAS run of matmul with an MPNumber\{Float64\} run in the semiring.
+The BLAS time was 0.26msec (practically free!) for a $100 \times 100$ array.  The semiring time
+was 313 msec.  This is no surprise.
+
+More interesting and more useful is the comparison for sparse matrices.  For an $n \times n$ sparse random array with density 1/n, where $n = 100,000$ the ordinary matrix multiply took 21 msec, and the semiring matrix multiply took a comparable 22 msec.
+
+For a higher density (5/n) we found 461 msec for the matmul compared to 414 msec in the semiring.
 
 
 \section{Conclusion}
 
+Julia facilitates the implementation and exploration of graph algorithms through
+the semiring notation of generalized matrix mutliply.  These algorithms appear
+in applications to data analysis and related fields.  Exploitation of sparse data
+strucutres provides easy implementations with reasonable performance.
+Sparse semiring performance is likely to be comparable to ordinary sparse matmul in the Julia
+language.
+
+\section{Acknowledgements}
+
+We gratefully acknowledge funding from Citigroup, Intel ISTC, VMware, and the Deshpande Foundation.
+
+\bibliographystyle{plain}
+\bibliography{hpec2013}
 
 \end{document}
