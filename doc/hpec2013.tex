@@ -1,19 +1,20 @@
 \documentclass[conference]{IEEEtran}
+\usepackage{listings}
 \begin{document}
 
 \title{Novel Algebras for Advanced Analytics in Julia}
 
 \author{\IEEEauthorblockN{
-Jeff Bezanson\IEEEauthorrefmark{4},
+Viral B. Shah\IEEEauthorrefmark{1},
+Alan Edelman\IEEEauthorrefmark{2},
 Stefan Karpinski\IEEEauthorrefmark{3},
-Jeremy Kepner\IEEEauthorrefmark{5},
-Viral B. Shah\IEEEauthorrefmark{1}, and
-Alan Edelman\IEEEauthorrefmark{2}}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}Email: bezanson@mit.edu}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Email: stefan@karpinski.org}
-\IEEEauthorblockA{\IEEEauthorrefmark{5}Email: kepner@ll.mit.edu}
+Jeff Bezanson\IEEEauthorrefmark{4}, 
+Jeremy Kepner\IEEEauthorrefmark{5}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Email: viral@mayin.org}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Email: edelman@math.mit.edu}}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Email: edelman@math.mit.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Email: stefan@karpinski.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}Email: bezanson@mit.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{5}Email: kepner@ll.mit.edu}}
 % make the title area
 \maketitle
 
@@ -106,7 +107,7 @@ Likewise, coroutines, macros and distributed programming primitives are right th
 We recommend trying the code examples in this paper.
 Just a few moments may convince the reader that Julia is simple yet powerful.
 All of the code may be found on GitHub:
-{\tt http://github.com/ViralBShah/SemiringAlgebra.jl}
+{\tt github.com/ViralBShah/SemiringAlgebra.jl}
 
 \section{Semiring algebra in Julia}
 
@@ -144,11 +145,11 @@ Julia's generic definitions for matrix multiplication, which depends only on hav
 
 \subsection{Star Overloading}
 
-First time users should readily be able to google, download, and install Julia.
-The star overloading functionality may be explored by typing directly into a Julia session:
-\begin{verbatim}
-function ringmatmul(+,*,A::Matrix,B::Matrix)
-  m, n, p = size(A,1), size(B,2), size(A,2)
+\begin{figure}
+\begin{lstlisting}[language=matlab, frame=single]
+function ringmatmul(+, *, 
+                    A::Matrix,B::Matrix)
+  m, p = size(A); n = size(B,2)
   C = [A[i,1]*B[1,j] for i=1:m, j=1:n]
   for i=1:m, j=1:n, k=2:p
     C[i,j] += A[i,k]*B[k,j]
@@ -158,31 +159,40 @@ end
 
 *((+)::Function, (*)::Function) = 
               (A,B)->ringmatmul(+,*,A,B)
-\end{verbatim}
+\end{lstlisting}
+\label{fig:ringmm}
+\caption{SemiRing matrix multiply by overloading + and *}
+\end{figure}
 
-The {\tt ringmatmul} function is straightforward -- it is a standard na\"ive triple loop matrix multiply.
-The function takes four arguments, the first two, {\tt +} and {\tt *}, are functions that will serves as the local versions of addition and multiplication, while the last two are the matrices to multiply using those operations.
-This highlights a few relevant features of the Julia language.
-First, functions are first-class values that can be passed into other functions as arguments and then used with standard function call syntax.
-Second, the {\tt +} and {\tt *} operators are just regular functions with some special syntax.
-For example, the expression {\tt C[i,j] += A[i,k]*B[k,j]} is translated into {\tt C[i,j] = +(C[i,j],*(A[i,k],B[k,j]))} where the functions {\tt +} and {\tt *} are looked up in the current scope just like any other variables would be.
-The second function definition says that if ``*"  is called with two arguments, both of which have the type {\tt Function}, then the result is a function itself which takes two arrays as arguments, and calls {\tt ringmatmul} with arguments {\tt f,g,A,B}.
-This highlights a few more features of Julia:
-it uses multiple dispatch by proding a new behavior for {\tt *} when its areguments are functions;
-it returns a function as a value, which can then be used elsewhere, again with the standard function call syntax.
+First time users should readily be able to google, download, and
+install Julia.  The star overloading functionality may be explored by
+typing the example in Figure~\ref{fig:ringmm} directly into a Julia
+session. The {\tt ringmatmul} function is straightforward -- it is a
+standard na\"ive triple loop matrix multiply.  The function takes four
+arguments, the first two, {\tt +} and {\tt *}, are functions that will
+serves as the local versions of addition and multiplication, while the
+last two are the matrices to multiply using those operations.  This
+highlights a few relevant features of the Julia language.  First,
+functions are first-class values that can be passed into other
+functions as arguments and then used with standard function call
+syntax.  Second, the {\tt +} and {\tt *} operators are just regular
+functions with some special syntax.  For example, the expression {\tt
+  C[i,j] += A[i,k]*B[k,j]} is translated into {\tt C[i,j] =
+  +(C[i,j],*(A[i,k],B[k,j]))} where the functions {\tt +} and {\tt *}
+are looked up in the current scope just like any other variables would
+be.  The second function definition says that if ``*" is called with
+two arguments, both of which have the type {\tt Function}, then the
+result is a function itself which takes two arrays as arguments, and
+calls {\tt ringmatmul} with arguments {\tt f,g,A,B}.  This highlights
+a few more features of Julia: it uses multiple dispatch by proding a
+new behavior for {\tt *} when its areguments are functions; it returns
+a function as a value, which can then be used elsewhere, again with
+the standard function call syntax.
 
 \subsection{Semiring Objects}
 
-Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
-by changing the definitions of ``+'' and ``*'', which below are set to use
-``max'' and ``plus''.
-The new type does not need to be taught matrix multiply; matmul will work with
-any underlying numeric type (e.g. int, float, ...), and will also work with
-both dense and sparse matrices. Arrays of the new semiring type will use the
-same amount of memory as ``primitive'' arrays of the underlying numeric type.
-
-
-\begin{verbatim}
+\begin{figure}
+\begin{lstlisting}[language=c++, frame=single]
 immutable MPNumber{T} <: Number
     val::T
 end
@@ -208,8 +218,18 @@ array{T}(A::Array{MPNumber{T}})
 mpsparse(S::SparseMatrixCSC)
       = SparseMatrixCSC(S.m, S.n, S.colptr,
              S.rowval,mparray(S.nzval))
-\end{verbatim}
+\end{lstlisting}
+\label{fig:MP}
+\caption{MPNumber type with Max-Plus Algebra properties}
+\end{figure}
 
+Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
+by changing the definitions of ``+'' and ``*'', which are set to use
+``max'' and ``plus'' (Figure~\ref{fig:MP}).
+The new type does not need to be taught matrix multiply; matmul will work with
+any underlying numeric type (e.g. int, float, ...), and will also work with
+both dense and sparse matrices. Arrays of the new semiring type will use the
+same amount of memory as ``primitive'' arrays of the underlying numeric type.
 
 The first definition describes the \verb+MPNumber+ type.
 Then plus and times are defined as max and plus respectively, followed by
@@ -221,21 +241,29 @@ numbers to work together.
 
 Finally the last three functions allow for the conversion between ordinary arrays and the semiring, with a special extra constructor for the important use case of sparse arrays.
 
-Some examples of using the code:
+Some examples of using the code are presented in the figure below:
 
+\begin{figure}[h]
+\begin{lstlisting}[language=python, frame=single]
+# Random MPNumber array
+A=mparray(rand(3,3)) 
+B=mparray(rand(3,3))
 
-\begin{verbatim}
-A=mparray(rand(3,3)); B=mparray(rand(3,3));
+# Multiply two matrices
 A*B
-A*A
+
+# Square a matrix
 A^2
-C=mpsparse(sparse(eye(3,3)));
+
+# Create a sparse identity matrix
+C=mpsparse(sparse(eye(3,3)))
+
+# Square a sparse matrix
 C*C
-\end{verbatim}
-
-
-
-
+\end{lstlisting}
+\label{fig:example}
+\caption{Example usage}
+\end{figure}
 
 \section{Performance}
 
@@ -249,18 +277,23 @@ On a Macbook Pro, with dual-core 2.4 GHz Intel core i5, 8GB RAM, we compared a d
 The BLAS time was 0.26msec (practically free!) for a $100 \times 100$ array.  The semiring time
 was 313 msec.  This is no surprise.
 
-More interesting and more useful is the comparison for sparse matrices.  For an $n \times n$ sparse random array with density 1/n, where $n = 100,000$ the ordinary matrix multiply took 21 msec, and the semiring matrix multiply took a comparable 22 msec.
-
-For a higher density (5/n) we found 461 msec for the matmul compared to 414 msec in the semiring.
+More interesting and more useful is the comparison for sparse
+matrices.  For an $n \times n$ sparse random array with density $1/n$,
+where $n = 100,000$ the ordinary matrix multiply took 21 msec, and the
+semiring matrix multiply took a comparable 22 msec. For a higher
+density of $5/n$, we found that the ordinary sparse matrix
+multiplication again was on par with the semiring version, taking 450
+msec in each case.
 
 
 \section{Conclusion}
 
-Julia facilitates the implementation and exploration of graph algorithms through
-the semiring notation of generalized matrix mutliply.  These algorithms appear
-in applications to data analysis and related fields.  Exploitation of sparse data
-strucutres provides easy implementations with reasonable performance.
-Sparse semiring performance is likely to be comparable to ordinary sparse matmul in the Julia
+Julia facilitates the implementation and exploration of graph
+algorithms through the semiring notation of generalized matrix
+mutliply.  These algorithms appear in applications to data analysis
+and related fields.  Exploitation of sparse data strucutres provides
+easy implementations with reasonable performance.  Sparse semiring
+performance is comparable to ordinary sparse matmul in the Julia
 language.
 
 \section{Acknowledgements}
