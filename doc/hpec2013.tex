@@ -151,6 +151,7 @@ Julia's generic definitions for matrix multiplication, which depends only on hav
 
 \begin{figure}
 \begin{lstlisting}[language=matlab, frame=single]
+
 function ringmatmul(+, *, 
                     A::Matrix,B::Matrix)
   m, p = size(A); n = size(B,2)
@@ -163,10 +164,15 @@ end
 
 *((+)::Function, (*)::Function) = 
               (A,B)->ringmatmul(+,*,A,B)
+             
 \end{lstlisting}
 \label{fig:ringmm}
 \caption{SemiRing matrix multiply by overloading + and *.  This seemingly textbook
-matrix multiply routine is anything but ordinary because + and * are local variables.
+matrix multiply routine is anything but ordinary because + and * are local variables.  Inside the subroutine + and * take on any semiring operations with which they are called.
+Thanks to Julia internals,
+users may execute this code at the prompty by simply typing  {\tt *(max,+)(A,B)} or
+the more familiar infix notation {\tt A *(max,+)B} . \newline
+Overloading allows users to conveniently explore multiple semiring operations on the same data.
 }
 \end{figure}
 
@@ -226,7 +232,14 @@ mpsparse(S::SparseMatrixCSC)
              S.rowval,mparray(S.nzval))
 \end{lstlisting}
 \label{fig:MP}
-\caption{MPNumber type with Max-Plus Algebra properties}
+\caption{
+An altnerative approach to that of Figure 1 is the 
+MPNumber type with Max-Plus Algebra properties.  Comparing with the overloading
+approach, this approach automatically works with dense and sparse matrices of any type without requiring the user to redefine matrix multiply.
+The code sets up a MaxPlus number
+({\tt MPNumber} ), defines a plus and times operator {\tt max} and {\tt +}, sets ut the identity elements ({\tt zero=typemin{T}} and {\tt one=zero(T)}). \newline
+Users simply type {\tt A*B} on arrays of the right type, and the semiring operation will just work. (See Fig. 3)
+}
 \end{figure}
 
 Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
@@ -268,7 +281,9 @@ C=mpsparse(sparse(eye(3,3)))
 C*C
 \end{lstlisting}
 \label{fig:example}
-\caption{Example usage}
+\caption{Example creation of an {\tt mparray}.
+Users simply create an mparray, and operate normally from there.
+The operations {\tt *} and $\wedge$  are automatically the max-plus operations without any user definition.}
 \end{figure}
 
 \section{Performance}
@@ -304,8 +319,9 @@ language.
 
 \section{Acknowledgements}
 
-We gratefully acknowledge funding from Citigroup, Intel ISTC, VMware, and the Deshpande Foundation.
+We gratefully acknowledge funding from Citigroup, Intel ISTC, VMware, and the Deshpande Foundation.  The other authors thank Jeremy Kepner for raising our awareness of the importance of semirings in high performance computing and data analysis.  
 
+\newpage
 \bibliographystyle{plain}
 \bibliography{hpec2013}
 
