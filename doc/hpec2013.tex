@@ -63,10 +63,10 @@ operations other than standard matrix multiply are desired, for
 example:
 
 \begin{enumerate}
-\item $$C = A \ {\max.+} B$$
-\item $$C = A \ \min.\max B$$
-\item $$C = A \ |.\& B \ ({\mbox or.and})$$
-\item $$C = A f.g B $$
+\item MaxPlus: $C = A \ {\max.+} B$
+\item MinMax: $C = A \ \min.\max B$
+\item OrAnd: $C = A \ |.\& B $
+\item General ($f$ and $g$) : $C = A f.g B $
 \end{enumerate}
 
 With this more general case of sparse matrix multiply, a wide range of
@@ -288,12 +288,9 @@ The operations {\tt *} and $\wedge$  are automatically the max-plus operations w
 
 \section{Performance}
 
-Peak possible performance for an ordinary matrix multiply on floating point numbers
-would be achieved by a highly tuned BLAS routine.
+Pne.
 The goal of Julia is to have the right combination of reasonable performance
-for the machine and productivity for the human.  So while we do not expect to match
-a tuned BLAS, performance will often be comparable to that of naive C code.
-
+for the machine and productivity for the human.  
 On a Macbook Pro, with dual-core 2.4 GHz Intel core i5, 8GB RAM, we compared a dense BLAS run of matmul with an MPNumber\{Float64\} run in the semiring.
 The BLAS time was 0.26msec (practically free!) for a $100 \times 100$ array.  The semiring time
 was 313 msec.  This is no surprise.
