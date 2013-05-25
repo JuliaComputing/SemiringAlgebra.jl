@@ -28,6 +28,7 @@ algebra techniques for graph algorithms is to use a broader definition
 of matrix and vector multiplication.  We demonstrate through the use
 of the Julia language system how easy it is to explore semirings using
 linear algebraic methodologies.
+
 \end{abstract}
 
 \section{Introduction}
@@ -109,6 +110,9 @@ Just a few moments may convince the reader that Julia is simple yet powerful.
 All of the code may be found on GitHub:
 {\tt github.com/ViralBShah/SemiringAlgebra.jl}
 
+
+Julia is a novel new paradigm constructed with high performance computing in mind.  Roughly speaking, high performance computing has been significantly difficult that getting codes up and working and in production has taken so much time, that there all too often has been little time for algorithmic exploration or software experimentation.  Julia is a game changer for high performance computing; but that is not the focus of this work.  In this work, our goal is to demonstrate the expressiveness and utility of Julia in the context of semirings.  We invite readers to imagine what a semiring implementation might look like, how long it would take to implement, and  how it might perform using their favorite programming methodology.
+ 
 \section{Semiring algebra in Julia}
 
 Julia's ordinary matrix multiplication is recognizable to users of many
@@ -161,7 +165,9 @@ end
               (A,B)->ringmatmul(+,*,A,B)
 \end{lstlisting}
 \label{fig:ringmm}
-\caption{SemiRing matrix multiply by overloading + and *}
+\caption{SemiRing matrix multiply by overloading + and *.  This seemingly textbook
+matrix multiply routine is anything but ordinary because + and * are local variables.
+}
 \end{figure}
 
 First time users should readily be able to google, download, and
