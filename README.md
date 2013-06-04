@@ -1,6 +1,8 @@
 SemiringAlgebra.jl
 ==================
 
+The doc/ directory includes a paper "Novel Algebras for Advanced Analytics in Julia", which describes the motivation for this package and its design.
+
 Example usage, see the bench() function in SemringAlgebra.jl.
 
 julia> require("SemiringAlgebra.jl")
