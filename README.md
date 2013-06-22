@@ -5,6 +5,7 @@ The doc/ directory includes a paper "Novel Algebras for Advanced Analytics in Ju
 
 Example usage, see the bench() function in SemringAlgebra.jl.
 
+````
 julia> require("SemiringAlgebra.jl")
 
 julia> importall SemiringAlgebra
@@ -34,5 +35,4 @@ elapsed time: 0.021785223 seconds
 elapsed time: 0.46143671 seconds
 100000x100000 sparse MPNumber{Float64} array (sprand(n,n,5/n))
 elapsed time: 0.413843755 seconds
-
-
+````
