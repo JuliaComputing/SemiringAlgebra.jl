@@ -110,10 +110,11 @@ Just a few moments may convince the reader that Julia is simple yet powerful.
 All of the code may be found on GitHub:
 {\tt github.com/ViralBShah/SemiringAlgebra.jl} .
 First time users should readily be able to google, download, and
-install Julia. 
+install Julia. The code in src can be cut and paste directly into a julia session.
 
 
-Julia is a novel new paradigm constructed with high performance computing in mind.  Roughly speaking, high performance computing has been significantly difficult that getting codes up and working and in production has taken so much time, that there all too often has been little time for algorithmic exploration or software experimentation.  Julia is a game changer for high performance computing; but that is not the focus of this work.  In this work, our goal is to demonstrate the expressiveness and utility of Julia in the context of semirings.  We invite readers to imagine what a semiring implementation might look like, how long it would take to implement, and  how it might perform using their favorite programming methodology.
+Julia is a novel new paradigm constructed with high performance computing in mind.  Roughly speaking, high performance computing has been so significantly difficult that getting codes up and working and in production has taken so much time.
+Consequently  there  has been little time for algorithmic exploration or software experimentation.  Julia is a game changer for high performance computing; but that is not the focus of this work.  In this work, our goal is to demonstrate the expressiveness and utility of Julia in the context of semirings.  We invite readers to imagine what a semiring implementation might look like, how long it would take to implement, and  how it might perform using their favorite programming methodology.
  
 \section{Semiring algebra in Julia}
 
@@ -172,14 +173,13 @@ end
 \caption{SemiRing matrix multiply by overloading + and *.  This seemingly textbook
 matrix multiply routine is anything but ordinary because + and * are local variables.  Inside the subroutine + and * take on any semiring operations with which they are called.
 Thanks to Julia internals,
-users may execute this code at the prompty by simply typing  {\tt *(max,+)(A,B)} or
-the more familiar infix notation {\tt A *(max,+)B} . \newline
+users may execute this code at the prompty by simply typing  {\tt *(max,+)(A,B)}.  \newline
 Overloading allows users to conveniently explore multiple semiring operations on the same data.
 }
 \end{figure}
 
 The star overloading functionality may be explored by
-typing the example in Figure~\ref{fig:ringmm} directly into a Julia
+typing the example in Figure 1 directly into a Julia
 session. The {\tt ringmatmul} function is straightforward -- it is a
 standard na\"ive triple loop matrix multiply.  The function takes four
 arguments, the first two, {\tt +} and {\tt *}, are functions that will
@@ -197,7 +197,7 @@ be.  The second function definition says that if ``*" is called with
 two arguments, both of which have the type {\tt Function}, then the
 result is a function itself which takes two arrays as arguments, and
 calls {\tt ringmatmul} with arguments {\tt f,g,A,B}.  This highlights
-a few more features of Julia: it uses multiple dispatch by proding a
+a few more features of Julia: it uses multiple dispatch by producing a
 new behavior for {\tt *} when its areguments are functions; it returns
 a function as a value, which can then be used elsewhere, again with
 the standard function call syntax.
@@ -245,7 +245,7 @@ Users simply type {\tt A*B} on arrays of the right type, and the semiring operat
 
 Here we create a ``max-plus'' semiring type.  Other semirings can be implemented
 by changing the definitions of ``+'' and ``*'', which are set to use
-``max'' and ``plus'' (Figure~\ref{fig:MP}).
+``max'' and ``plus'' (Figure 2).
 The new type does not need to be taught matrix multiply; matmul will work with
 any underlying numeric type (e.g. int, float, ...), and will also work with
 both dense and sparse matrices. Arrays of the new semiring type will use the
@@ -261,7 +261,7 @@ numbers to work together.
 
 Finally the last three functions allow for the conversion between ordinary arrays and the semiring, with a special extra constructor for the important use case of sparse arrays.
 
-Some examples of using the code are presented in the figure below:
+Some examples of using the code are presented in Figure 3.
 
 \begin{figure}[h]
 \begin{lstlisting}[language=python, frame=single]
@@ -289,7 +289,7 @@ The operations {\tt *} and $\wedge$  are automatically the max-plus operations w
 
 \section{Performance}
 
-Pne.
+
 The goal of Julia is to have the right combination of reasonable performance
 for the machine and productivity for the human.  
 On a Macbook Pro, with dual-core 2.4 GHz Intel core i5, 8GB RAM, we compared a dense BLAS run of matmul with an MPNumber\{Float64\} run in the semiring.
