@@ -1,0 +1,14 @@
+name = "SemiringAlgebra"
+uuid = "384f49c0-ffe3-11e8-0b80-b12655f56ed5"
+authors = ["Viral B. Shah <viral@mayin.org>", "Alan Edelman <edelman@math.mit.edu>", "Stefan Karpinski <stefan@karpinski.org>", "Jeff Bezanson <bezanson@mit.edu>", "Jeremy Kepner <kepner@ll.mit.edu>"]
+qname = "SemiringAlgebra"
+version = "0.1.0"
+
+[deps]
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
