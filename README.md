@@ -4,7 +4,7 @@ SemiringAlgebra.jl
 The doc/ directory includes a paper "Novel Algebras for Advanced Analytics in Julia", which describes the motivation for this package and its design.
 
 Example usage, see the bench() function in SemringAlgebra.jl.
-
+```
 julia> using SemiringAlgebra
 
 100x100 Float64 array
@@ -31,3 +31,4 @@ julia> using SemiringAlgebra
   0.147927 seconds (22 allocations: 65.650 MiB, 4.86% gc time)
 100000x100000 sparse MPNumber{Float64} array (sprand(n,n,5/n))
   0.146088 seconds (22 allocations: 65.650 MiB, 4.94% gc time)
+```
