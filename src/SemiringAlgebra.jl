@@ -13,8 +13,10 @@ end
 *(a::MPNumber, b::MPNumber) = MPNumber(a.val+b.val)
 
 Base.show(io::IO, k::MPNumber) = print(io, k.val)
-Base.zero(::Type{MPNumber{T}}) where{T} = MPNumber(typemin(T))
-Base.one(::Type{MPNumber{T}}) where{T}  = MPNumber(zero(T))
+Base.zero(::MPNumber{T}) where T = MPNumber(typemin(T))
+Base.one(::MPNumber{T}) where T = MPNumber(zero(T))
+Base.zero(::Type{MPNumber{T}}) where T = MPNumber(typemin(T))
+Base.one(::Type{MPNumber{T}}) where T = MPNumber(zero(T))
 Base.promote_rule(::Type{MPNumber}, ::Type{Number}) = MPNumber
 
 mparray(A::Array) = map(MPNumber, A)
