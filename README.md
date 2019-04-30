@@ -3,9 +3,16 @@ SemiringAlgebra.jl
 
 The `doc/` directory includes a paper [Novel Algebras for Advanced Analytics in Julia](https://dspace.mit.edu/openaccess-disseminate/1721.1/115964), which describes the motivation for this package and its design.
 
-Example usage, see the [bench()](https://github.com/JuliaComputing/SemiringAlgebra.jl/blob/af67f6705bc531a85c61bc4e270be90fb8a54b24/src/SemiringAlgebra.jl#L37) function in SemringAlgebra.jl.
-```
+Example usage, see the [bench()](https://github.com/JuliaComputing/SemiringAlgebra.jl/blob/af67f6705bc531a85c61bc4e270be90fb8a54b24/src/SemiringAlgebra.jl#L37) function in `SemringAlgebra.jl`.
+
+```julia
+julia> using Pkg; Pkg.add(PackageSpec(url = pwd())); Pkg.build()
+
+julia> Pkg.test("SemiringAlgebra")
+
 julia> using SemiringAlgebra
+
+julia> SemiringAlgebra.bench(100)
 
 100x100 Float64 array
   0.000345 seconds (2 allocations: 78.203 KiB)
