@@ -1,7 +1,7 @@
 SemiringAlgebra.jl
 ==================
 
-The `doc/` directory includes a paper [Novel Algebras for Advanced Analytics in Julia](https://dspace.mit.edu/openaccess-disseminate/1721.1/115964), which describes the motivation for this package and its design.
+The `doc/` directory includes a paper [Novel Algebras for Advanced Analytics in Julia](https://dspace.mit.edu/handle/1721.1/115964), which describes the motivation for this package and its design.
 
 Example usage, see the [bench()](https://github.com/JuliaComputing/SemiringAlgebra.jl/blob/af67f6705bc531a85c61bc4e270be90fb8a54b24/src/SemiringAlgebra.jl#L37) function in `SemringAlgebra.jl`.
 
